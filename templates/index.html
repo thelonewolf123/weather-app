@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>weather app</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename = '/assets/bootstrap/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename = '/assets/fonts/font-awesome.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename =  '/assets/fonts/ionicons.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename = '/assets/css/Footer-Basic.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename =  '/assets/css/Navigation-with-Search.css') }} ">
+    <link rel="stylesheet" href="{{url_for('static', filename =  '/assets/css/styles.css') }}">
+</head>
+
+<body>
+
+    <nav class="navbar navbar-dark bg-dark">
+        <div class="container"><a class="navbar-brand" href="#">Weather app</a>
+        </div>
+    </nav>
+    <div class="container mt-4">
+        <form action="/weather/" class="form-inline" method="POST">
+            <input class="form-control mb-2 mr-sm-2" type="text" name="city" id="" placeholder="City...">
+            <button class="btn btn-primary mb-2" type="submit">
+                Get Weather
+            </button>
+        </form>
+        <div style="height:100px;"></div>
+        {% if city %}
+        {% if weather %}
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Weather on {{ city }}</h4>
+                <from class="form-inline">
+                    <img src='http://openweathermap.org/img/wn/{{weather.icon}}@2x.png' alt='...'
+                        style="margin-right: 20px;" />
+                    <p class="card-text">{{ weather.disc }}</p>
+                    </form>
+                </from>
+                <div style="height: 10px; width: 100%;"></div>
+                <div class="row">
+                    <div class="col">
+                        <a class="card-link" href="#">Temprature : {{ weather.temp }}° celsius </a>
+                    </div>
+                    <div class="col">
+                        <a class="card-link" href="#">Wind speed : {{ weather.wind }} Km/h</a>
+                    </div>
+                    <div class="col">
+                        <a class="card-link" href="#">Humidity : {{ weather.humidity }} %</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% else %}
+        <div class="alert alert-danger" role="alert">
+            City not found in the world
+        </div>
+        {% endif %}
+        {% endif %}
+    </div>
+    <div class="footer-basic bg-dark" style="margin-top:100px; color: aliceblue;">
+        <footer>
+            <div class="social"><a href="https://instagram.com/cyberhunter.hk"><i
+                        class="icon ion-social-instagram"></i></a><a href=""><i
+                        class="icon ion-social-twitter"></i></a><a href="#"><i class="icon ion-social-facebook"></i></a>
+            </div>
+            <ul class="list-inline bg-dark">
+                <li class="list-inline-item"><a href="#">Home</a></li>
+                <li class="list-inline-item"><a href="#">About</a></li>
+            </ul>
+            <p class="copyright">Weather app © 2020</p>
+        </footer>
+    </div>
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+</body>
+
+</html>
